@@ -1,51 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>I love you</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #fce4ec;
-        }
-    </style>
+  <meta name="google-site-verification" content="2t7ZGA_9lLWoCquqlxgYBs2AMV6taj_QAhcObMgCKWk" />
+  <title>About Me</title>
 </head>
-<body>
-    <canvas id="heartCanvas"></canvas>
-    <script>
-        const canvas = document.getElementById("heartCanvas");
-        const ctx = canvas.getContext("2d");
-        canvas.width = 400;
-        canvas.height = 400;
-        
-        let size = 0;
-        const maxSize = 150;
-        const centerX = canvas.width / 2;
-        const centerY = canvas.height / 2;
-        
-        function drawHeart(x, y, size) {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = "red";
-            ctx.beginPath();
-            ctx.moveTo(x, y + size / 4);
-            ctx.bezierCurveTo(x - size, y - size / 2, x - size * 2, y + size / 3, x, y + size);
-            ctx.bezierCurveTo(x + size * 2, y + size / 3, x + size, y - size / 2, x, y + size / 4);
-            ctx.fill();
-        }
-        
-        function animateHeart() {
-            if (size < maxSize) {
-                size += 2;
-                drawHeart(centerX, centerY, size);
-                requestAnimationFrame(animateHeart);
-            }
-        }
-        
-        animateHeart();
-    </script>
-</body>
+  <body>
+    <h1>Marius-Alexandru Roșu</h1>
+    <p>My name is Marius and I am a student in my final year of university. I edited this page :)</p>
+    <p>I hope I will pass the blockchain exam without any problems hehe :')</p>
+    <p>This is the last update for today. :)</p>
+    <p>I will go back to studying right now.</p>
+    <p>Goodbye and goodnight! <3</p>
+  </body>
+
 </html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Heart Drawing</title>
+    <title>Love you</title>
     <style>
         body {
             display: flex;
@@ -27,19 +27,33 @@
             const canvas = document.getElementById('heartCanvas');
             const ctx = canvas.getContext('2d');
 
-            // Set up heart shape (adjusted for better symmetry)
-            ctx.beginPath();
-            ctx.moveTo(200, 150);  // Start at the bottom of the heart
+            let progress = 0; // Control how much of the heart has been drawn
 
-            // Right side
-            ctx.bezierCurveTo(270, 50, 400, 150, 200, 230); 
+            function drawHeart() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
+                ctx.beginPath();
+                
+                // Move to the starting point of the heart
+                ctx.moveTo(200, 150);
 
-            // Left side
-            ctx.bezierCurveTo(0, 150, 130, 50, 200, 150); 
+                // Draw the right side of the heart (animate the curves)
+                if (progress >= 1) ctx.bezierCurveTo(270, 50, 400, 150, 200, 230); 
 
-            ctx.closePath();
-            ctx.fillStyle = 'red';
-            ctx.fill();
+                // Draw the left side of the heart (animate the curves)
+                if (progress >= 2) ctx.bezierCurveTo(0, 150, 130, 50, 200, 150);
+
+                ctx.closePath();
+                ctx.fillStyle = 'red';
+                ctx.fill();
+
+                // Increment the progress to animate the drawing
+                if (progress < 2) {
+                    progress += 0.01; // Control speed of drawing
+                    requestAnimationFrame(drawHeart);
+                }
+            }
+
+            drawHeart(); // Start drawing the heart
         };
     </script>
 </body>

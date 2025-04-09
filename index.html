@@ -27,14 +27,15 @@
             const canvas = document.getElementById('heartCanvas');
             const ctx = canvas.getContext('2d');
             
-            let progress = 0; // Keeps track of how many "pixels" we have drawn
+            let progress = 0; // Keeps track of how many "segments" we've drawn
+            const speed = 5; // Controls how many points to draw each time (higher = faster)
 
-            // Define a function to draw a single "pixel" on the path
+            // Define a function to draw a single pixel on the path
             function drawPixel(x, y) {
                 ctx.fillRect(x, y, 1, 1); // Draw a 1x1 pixel at (x, y)
             }
 
-            // Function to draw the heart using pixels
+            // Function to draw the heart using parametric equations
             function drawHeart() {
                 const heartPath = [];
 
@@ -45,16 +46,22 @@
                     heartPath.push({ x: x, y: y });
                 }
 
-                // Incrementally draw pixels along the path
-                if (progress < heartPath.length) {
-                    const pixel = heartPath[progress];
+                // Draw multiple points in each frame to make it faster
+                let end = Math.min(progress + speed, heartPath.length);
+
+                for (let i = progress; i < end; i++) {
+                    const pixel = heartPath[i];
                     drawPixel(pixel.x, pixel.y);
-                    progress++;
-                    requestAnimationFrame(drawHeart); // Keep drawing the next pixel
+                }
+
+                progress += speed;
+
+                if (progress < heartPath.length) {
+                    requestAnimationFrame(drawHeart); // Keep drawing until the heart is completed
                 }
             }
 
-            drawHeart(); // Start the animation of drawing the heart pixel by pixel
+            drawHeart(); // Start the animation of drawing the heart
         };
     </script>
 </body>

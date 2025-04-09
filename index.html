@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Love you</title>
+    <title>Pixel-by-Pixel Heart Drawing</title>
     <style>
         body {
             display: flex;
@@ -26,34 +26,35 @@
         window.onload = function() {
             const canvas = document.getElementById('heartCanvas');
             const ctx = canvas.getContext('2d');
+            
+            let progress = 0; // Keeps track of how many "pixels" we have drawn
 
-            let progress = 0; // Control how much of the heart has been drawn
+            // Define a function to draw a single "pixel" on the path
+            function drawPixel(x, y) {
+                ctx.fillRect(x, y, 1, 1); // Draw a 1x1 pixel at (x, y)
+            }
 
+            // Function to draw the heart using pixels
             function drawHeart() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
-                ctx.beginPath();
-                
-                // Move to the starting point of the heart
-                ctx.moveTo(200, 150);
+                const heartPath = [];
 
-                // Draw the right side of the heart (animate the curves)
-                if (progress >= 1) ctx.bezierCurveTo(270, 50, 400, 150, 200, 230); 
+                // Define the points of the heart using the parametric equation of a heart shape
+                for (let t = 0; t < Math.PI * 2; t += 0.001) {
+                    let x = 200 + 16 * Math.sin(t) ** 3;
+                    let y = 150 - (13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t)) * 10;
+                    heartPath.push({ x: x, y: y });
+                }
 
-                // Draw the left side of the heart (animate the curves)
-                if (progress >= 2) ctx.bezierCurveTo(0, 150, 130, 50, 200, 150);
-
-                ctx.closePath();
-                ctx.fillStyle = 'red';
-                ctx.fill();
-
-                // Increment the progress to animate the drawing
-                if (progress < 2) {
-                    progress += 0.01; // Control speed of drawing
-                    requestAnimationFrame(drawHeart);
+                // Incrementally draw pixels along the path
+                if (progress < heartPath.length) {
+                    const pixel = heartPath[progress];
+                    drawPixel(pixel.x, pixel.y);
+                    progress++;
+                    requestAnimationFrame(drawHeart); // Keep drawing the next pixel
                 }
             }
 
-            drawHeart(); // Start drawing the heart
+            drawHeart(); // Start the animation of drawing the heart pixel by pixel
         };
     </script>
 </body>

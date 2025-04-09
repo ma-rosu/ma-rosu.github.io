@@ -37,7 +37,7 @@
                 // Define the points of the heart using the parametric equation of a heart shape
                 // Widening the heart by adjusting the horizontal scaling factor (x = x * 1.5)
                 for (let t = 0; t < Math.PI * 2; t += 0.001) {
-                    let x = 200 + 16 * Math.sin(t) ** 3 * 3; // Widened heart
+                    let x = 200 + 16 * Math.sin(t) ** 3 * 6; // Widened heart
                     let y = 150 - (13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t)) * 10;
                     heartPath.push({ x: x, y: y });
                 }

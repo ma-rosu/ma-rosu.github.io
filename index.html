@@ -27,13 +27,15 @@
             const canvas = document.getElementById('heartCanvas');
             const ctx = canvas.getContext('2d');
 
-            // Set up heart shape
+            // Set up heart shape (adjusted for better symmetry)
             ctx.beginPath();
-            ctx.moveTo(200, 150);
-            ctx.bezierCurveTo(200, 70, 250, 70, 250, 150); // Right side
-            ctx.bezierCurveTo(250, 230, 200, 230, 200, 300); // Bottom
-            ctx.bezierCurveTo(200, 230, 150, 230, 150, 150); // Left side
-            ctx.bezierCurveTo(150, 70, 100, 70, 100, 150); // Left top
+            ctx.moveTo(200, 150);  // Start at the bottom of the heart
+
+            // Right side
+            ctx.bezierCurveTo(270, 50, 400, 150, 200, 230); 
+
+            // Left side
+            ctx.bezierCurveTo(0, 150, 130, 50, 200, 150); 
 
             ctx.closePath();
             ctx.fillStyle = 'red';

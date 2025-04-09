@@ -1,15 +1,44 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta name="google-site-verification" content="2t7ZGA_9lLWoCquqlxgYBs2AMV6taj_QAhcObMgCKWk" />
-  <title>About Me</title>
-</head>
-  <body>
-    <h1>Marius-Alexandru Roșu</h1>
-    <p>My name is Marius and I am a student in my final year of university. I edited this page :)</p>
-    <p>I hope I will pass the blockchain exam without any problems hehe :')</p>
-    <p>This is the last update for today. :)</p>
-    <p>I will go back to studying right now.</p>
-    <p>Goodbye and goodnight! <3</p>
-  </body>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Drawing</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
 
+        canvas {
+            border: 2px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="heartCanvas" width="400" height="400"></canvas>
+
+    <script>
+        window.onload = function() {
+            const canvas = document.getElementById('heartCanvas');
+            const ctx = canvas.getContext('2d');
+
+            // Set up heart shape
+            ctx.beginPath();
+            ctx.moveTo(200, 150);
+            ctx.bezierCurveTo(200, 70, 250, 70, 250, 150); // Right side
+            ctx.bezierCurveTo(250, 230, 200, 230, 200, 300); // Bottom
+            ctx.bezierCurveTo(200, 230, 150, 230, 150, 150); // Left side
+            ctx.bezierCurveTo(150, 70, 100, 70, 100, 150); // Left top
+
+            ctx.closePath();
+            ctx.fillStyle = 'red';
+            ctx.fill();
+        };
+    </script>
+</body>
 </html>

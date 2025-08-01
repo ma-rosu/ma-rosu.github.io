@@ -17,7 +17,8 @@
             font-family: 'Dancing Script', cursive, sans-serif;
             text-align: center;
             overflow: hidden; 
-            padding-top: 50px; /* Add padding to push the content down from the top edge */
+            /* The padding-top value has been reduced to move the content higher */
+            padding-top: 20px; 
             box-sizing: border-box;
         }
         #text-container {
@@ -32,7 +33,6 @@
                 blink-caret 0.75s step-end infinite;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
             padding: 10px;
-            /* This margin pushes the text down a little from the top padding */
             margin-bottom: 50px; 
         }
         @keyframes typing {
@@ -76,7 +76,7 @@
         }
         .floating-heart {
             position: absolute;
-            bottom: -50px; /* Start hearts from below the screen */
+            bottom: -50px; 
             width: 20px;
             height: 20px;
             background-color: #ffb6c1;

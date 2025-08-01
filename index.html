@@ -3,71 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Love you</title>
+    <title>La multi ani</title>
     <style>
         body {
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
             height: 100vh;
             margin: 0;
             background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            text-align: center;
         }
-
-        canvas {
-            border: 2px solid #000;
+        #text-container {
+            font-size: 3em;
+            font-weight: bold;
+            color: #d32f2f;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 0.15em solid #d32f2f;
+            animation:
+                typing 3.5s steps(40, end),
+                blink-caret 0.75s step-end infinite;
+        }
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #d32f2f; }
+        }
+        .heart {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin-top: 20px;
+            transform: rotate(-45deg);
+            background-color: #d32f2f;
+            animation: pulse 1s infinite;
+        }
+        .heart::before,
+        .heart::after {
+            content: "";
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background-color: #d32f2f;
+            border-radius: 50%;
+        }
+        .heart::before {
+            top: -75px;
+            left: 0;
+        }
+        .heart::after {
+            top: 0;
+            left: 75px;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1) rotate(-45deg); }
+            50% { transform: scale(1.1) rotate(-45deg); }
+            100% { transform: scale(1) rotate(-45deg); }
         }
     </style>
 </head>
 <body>
-    <canvas id="heartCanvas" width="400" height="400"></canvas>
+    <div id="text-container"></div>
+    <div class="heart"></div>
 
     <script>
-        window.onload = function() {
-            const canvas = document.getElementById('heartCanvas');
-            const ctx = canvas.getContext('2d');
-            
-            let progress = 0; // Keeps track of how many "segments" we've drawn
-            const speed = 10; // Controls how many points to draw each time (higher = faster)
+        const text = "La multi ani de ziua gagicilor, gacica mea!";
+        const textContainer = document.getElementById("text-container");
+        let i = 0;
 
-            // Function to draw the heart shape and progressively fill it
-            function drawHeart() {
-                const heartPath = [];
-
-                // Define the points of the heart using the parametric equation of a heart shape
-                // Widening the heart by adjusting the horizontal scaling factor (x = x * 1.5)
-                for (let t = 0; t < Math.PI * 2; t += 0.001) {
-                    let x = 200 + 16 * Math.sin(t) ** 3 * 6; // Widened heart
-                    let y = 150 - (13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t)) * 10;
-                    heartPath.push({ x: x, y: y });
-                }
-
-                // Start drawing and progressively fill the heart
-                ctx.beginPath();
-                ctx.moveTo(heartPath[0].x, heartPath[0].y);
-
-                // Draw multiple points in each frame to make it faster
-                let end = Math.min(progress + speed, heartPath.length);
-                for (let i = progress; i < end; i++) {
-                    const pixel = heartPath[i];
-                    ctx.lineTo(pixel.x, pixel.y);
-                }
-
-                ctx.lineTo(heartPath[0].x, heartPath[0].y); // Close the path to complete the heart shape
-
-                // Fill the heart with red color after drawing the outline
-                ctx.fillStyle = 'red';
-                ctx.fill();
-
-                progress += speed;
-
-                if (progress < heartPath.length) {
-                    requestAnimationFrame(drawHeart); // Keep drawing until the heart is completed
-                }
+        function typeWriter() {
+            if (i < text.length) {
+                textContainer.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100);
             }
+        }
 
-            drawHeart(); // Start the animation of drawing the heart
-        };
+        window.onload = typeWriter;
     </script>
 </body>
 </html>

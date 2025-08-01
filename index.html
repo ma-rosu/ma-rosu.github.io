@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +16,9 @@
             background: linear-gradient(135deg, #ffc0cb 0%, #ffe4e1 100%);
             font-family: 'Dancing Script', cursive, sans-serif;
             text-align: center;
-            overflow: hidden; /* Hide hearts that go off-screen */
+            overflow: hidden; 
+            padding-top: 50px; /* Add padding to push the content down from the top edge */
+            box-sizing: border-box;
         }
         #text-container {
             font-size: 4em;
@@ -31,6 +32,8 @@
                 blink-caret 0.75s step-end infinite;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
             padding: 10px;
+            /* This margin pushes the text down a little from the top padding */
+            margin-bottom: 50px; 
         }
         @keyframes typing {
             from { width: 0 }
@@ -40,19 +43,11 @@
             from, to { border-color: transparent }
             50% { border-color: #880e4f; }
         }
-        .heart-container {
-            position: relative;
-            margin-top: 80px;
-            width: 200px;
-            height: 200px;
-        }
         .main-heart {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-45deg);
+            position: relative;
             width: 150px;
             height: 150px;
+            transform: rotate(-45deg);
             background-color: #d32f2f;
             box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
             animation: pulse 1s infinite;
@@ -81,6 +76,7 @@
         }
         .floating-heart {
             position: absolute;
+            bottom: -50px; /* Start hearts from below the screen */
             width: 20px;
             height: 20px;
             background-color: #ffb6c1;
@@ -113,23 +109,22 @@
         .floating-heart:nth-child(6) { left: 85%; animation-delay: 5s; }
 
         @keyframes float {
-            0% { transform: translate(-50%, 0) rotate(-45deg); opacity: 0; }
-            50% { transform: translate(-50%, -200px) rotate(-45deg); opacity: 1; }
-            100% { transform: translate(-50%, -400px) rotate(-45deg); opacity: 0; }
+            0% { transform: rotate(-45deg) scale(0.5); opacity: 0; }
+            50% { transform: translateY(-50vh) rotate(-45deg) scale(1); opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(-45deg) scale(1.5); opacity: 0; }
         }
     </style>
 </head>
 <body>
-    <div class="heart-container">
-        <div class="floating-heart"></div>
-        <div class="floating-heart"></div>
-        <div class="floating-heart"></div>
-        <div class="floating-heart"></div>
-        <div class="floating-heart"></div>
-        <div class="floating-heart"></div>
-    </div>
     <div id="text-container"></div>
     <div class="main-heart"></div>
+
+    <div class="floating-heart"></div>
+    <div class="floating-heart"></div>
+    <div class="floating-heart"></div>
+    <div class="floating-heart"></div>
+    <div class="floating-heart"></div>
+    <div class="floating-heart"></div>
 
     <script>
         const text = "La multi ani de ziua gagicilor, gacica mea!";
@@ -148,4 +143,3 @@
     </script>
 </body>
 </html>
-```

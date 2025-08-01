@@ -1,9 +1,11 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La multi ani</title>
+    <title>Pentru Gacica Mea</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <style>
         body {
             display: flex;
@@ -12,20 +14,23 @@
             flex-direction: column;
             height: 100vh;
             margin: 0;
-            background-color: #FFC0CB;
-            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ffc0cb 0%, #ffe4e1 100%);
+            font-family: 'Dancing Script', cursive, sans-serif;
             text-align: center;
+            overflow: hidden; /* Hide hearts that go off-screen */
         }
         #text-container {
-            font-size: 3em;
+            font-size: 4em;
             font-weight: bold;
-            color: #d32f2f;
+            color: #880e4f;
             white-space: nowrap;
             overflow: hidden;
-            border-right: 0.15em solid #d32f2f;
+            border-right: 0.15em solid #880e4f;
             animation:
-                typing 3.5s steps(40, end),
+                typing 3.5s steps(40, end) forwards,
                 blink-caret 0.75s step-end infinite;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            padding: 10px;
         }
         @keyframes typing {
             from { width: 0 }
@@ -33,20 +38,27 @@
         }
         @keyframes blink-caret {
             from, to { border-color: transparent }
-            50% { border-color: #d32f2f; }
+            50% { border-color: #880e4f; }
         }
-        .heart {
+        .heart-container {
             position: relative;
+            margin-top: 80px;
+            width: 200px;
+            height: 200px;
+        }
+        .main-heart {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
             width: 150px;
             height: 150px;
-            /* The margin-top value has been increased to lower the heart */
-            margin-top: 80px; 
-            transform: rotate(-45deg);
             background-color: #d32f2f;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
             animation: pulse 1s infinite;
         }
-        .heart::before,
-        .heart::after {
+        .main-heart::before,
+        .main-heart::after {
             content: "";
             position: absolute;
             width: 150px;
@@ -54,11 +66,11 @@
             background-color: #d32f2f;
             border-radius: 50%;
         }
-        .heart::before {
+        .main-heart::before {
             top: -75px;
             left: 0;
         }
-        .heart::after {
+        .main-heart::after {
             top: 0;
             left: 75px;
         }
@@ -67,11 +79,57 @@
             50% { transform: scale(1.1) rotate(-45deg); }
             100% { transform: scale(1) rotate(-45deg); }
         }
+        .floating-heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #ffb6c1;
+            transform: rotate(-45deg);
+            opacity: 0;
+            animation: float 5s ease-in infinite;
+        }
+        .floating-heart::before,
+        .floating-heart::after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #ffb6c1;
+            border-radius: 50%;
+        }
+        .floating-heart::before {
+            top: -10px;
+            left: 0;
+        }
+        .floating-heart::after {
+            top: 0;
+            left: 10px;
+        }
+        .floating-heart:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .floating-heart:nth-child(2) { left: 25%; animation-delay: 1s; }
+        .floating-heart:nth-child(3) { left: 40%; animation-delay: 2s; }
+        .floating-heart:nth-child(4) { left: 55%; animation-delay: 3s; }
+        .floating-heart:nth-child(5) { left: 70%; animation-delay: 4s; }
+        .floating-heart:nth-child(6) { left: 85%; animation-delay: 5s; }
+
+        @keyframes float {
+            0% { transform: translate(-50%, 0) rotate(-45deg); opacity: 0; }
+            50% { transform: translate(-50%, -200px) rotate(-45deg); opacity: 1; }
+            100% { transform: translate(-50%, -400px) rotate(-45deg); opacity: 0; }
+        }
     </style>
 </head>
 <body>
+    <div class="heart-container">
+        <div class="floating-heart"></div>
+        <div class="floating-heart"></div>
+        <div class="floating-heart"></div>
+        <div class="floating-heart"></div>
+        <div class="floating-heart"></div>
+        <div class="floating-heart"></div>
+    </div>
     <div id="text-container"></div>
-    <div class="heart"></div>
+    <div class="main-heart"></div>
 
     <script>
         const text = "La multi ani de ziua gagicilor, gacica mea!";
@@ -90,3 +148,4 @@
     </script>
 </body>
 </html>
+```
